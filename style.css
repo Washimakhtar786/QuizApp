@@ -1,4 +1,4 @@
-/* General page setup */
+/* General Page Setup */
 body {
   font-family: "Poppins", sans-serif;
   background: linear-gradient(135deg, #667eea, #764ba2);
@@ -11,7 +11,7 @@ body {
   margin: 0;
 }
 
-/* Quiz container styling */
+/* Main Card Style */
 .quiz-container {
   background: white;
   padding: 2.5rem;
@@ -29,7 +29,7 @@ body {
   margin-bottom: 1rem;
 }
 
-/* Progress bar */
+/* Progress Bar */
 .progress {
   margin-bottom: 1.5rem;
   text-align: left;
@@ -81,7 +81,7 @@ button.option-btn.selected {
   border-color: #4f46e5;
 }
 
-/* Next button */
+/* Next Button */
 #next-btn {
   background: #10b981;
   color: white;
@@ -101,6 +101,21 @@ button.option-btn.selected {
   cursor: not-allowed;
 }
 
+/* Start Screen Button */
+#start-btn {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.9rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#start-btn:hover {
+  background: #3730a3;
+}
+
 /* Footer */
 footer {
   margin-top: 2rem;
@@ -108,13 +123,13 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Result Page */
-.result {
-  text-align: center;
-}
+/* Result */
 .result h2 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
+}
+.result p {
+  margin: 0.5rem 0;
 }
 .result button {
   background: #4f46e5;
@@ -130,6 +145,9 @@ footer {
 }
 
 /* Animation */
+.fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }

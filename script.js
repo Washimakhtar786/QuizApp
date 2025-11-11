@@ -1,4 +1,4 @@
-// 🧠 Quiz Questions Data
+// 🧠 Quiz Data
 const quizData = [
   {
     question: "What does HTML stand for?",
@@ -33,27 +33,35 @@ const quizData = [
 ];
 
 // 🎯 Select Elements
+const startScreen = document.getElementById("start-screen");
+const startBtn = document.getElementById("start-btn");
+const quizContainer = document.getElementById("quiz");
 const questionEl = document.getElementById("question");
 const optionsEl = document.querySelectorAll(".option-btn");
 const nextBtn = document.getElementById("next-btn");
 const progressText = document.getElementById("progress-text");
 const progressFill = document.getElementById("progress-fill");
-const quizContainer = document.getElementById("quiz");
 
-// 📊 Quiz State
 let currentQuestion = 0;
 let score = 0;
 let selectedOption = "";
 
+// 🚀 Start Quiz
+startBtn.addEventListener("click", () => {
+  startScreen.style.display = "none";
+  quizContainer.style.display = "block";
+  loadQuestion();
+});
+
 // 🧩 Load Question
 function loadQuestion() {
   const current = quizData[currentQuestion];
-  questionEl.innerHTML = current.question;
+  questionEl.textContent = current.question;
   progressText.textContent = `Question ${currentQuestion + 1} of ${quizData.length}`;
   progressFill.style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
 
   optionsEl.forEach((btn, index) => {
-    btn.innerHTML = current.options[index];
+    btn.textContent = current.options[index];
     btn.classList.remove("selected");
     btn.disabled = false;
   });
@@ -62,55 +70,49 @@ function loadQuestion() {
   selectedOption = "";
 }
 
-// 🖱️ Handle Option Selection
+// 🖱️ Option Click
 optionsEl.forEach((btn) => {
   btn.addEventListener("click", () => {
     optionsEl.forEach((b) => b.classList.remove("selected"));
     btn.classList.add("selected");
-    selectedOption = btn.innerHTML;
+    selectedOption = btn.textContent;
     nextBtn.disabled = false;
   });
 });
 
-// ⏭️ Next Button Logic
+// ⏭️ Next Button
 nextBtn.addEventListener("click", () => {
   const correctAnswer = quizData[currentQuestion].answer;
   if (selectedOption === correctAnswer) score++;
-
   currentQuestion++;
-
-  if (currentQuestion < quizData.length) {
-    loadQuestion();
-  } else {
-    showResult();
-  }
+  if (currentQuestion < quizData.length) loadQuestion();
+  else showResult();
 });
 
 // 🏁 Show Result
 function showResult() {
   quizContainer.innerHTML = `
-    <div class="result">
+    <div class="result fade-in">
       <h2>🎉 Quiz Completed!</h2>
       <p>You scored <strong>${score}</strong> out of <strong>${quizData.length}</strong></p>
       <p>${getFeedback(score)}</p>
-      <button onclick="restartQuiz()">Restart 🔄</button>
+      <button id="restart-btn">Restart 🔄</button>
     </div>`;
+
+  document.getElementById("restart-btn").addEventListener("click", restartQuiz);
 }
 
-// 💬 Feedback based on score
+// 💬 Feedback
 function getFeedback(score) {
   const total = quizData.length;
   const percent = (score / total) * 100;
-  if (percent === 100) return "🔥 Perfect Score! You're a JavaScript Master!";
-  if (percent >= 80) return "💪 Great job! You know your basics well.";
+  if (percent === 100) return "🔥 Perfect Score! You’re a Web Wizard!";
+  if (percent >= 80) return "💪 Great job! You really know your stuff.";
   if (percent >= 50) return "👍 Good effort! Keep practicing.";
   return "📚 Don’t worry! Review and try again!";
 }
 
-// 🔄 Restart Quiz
+// 🔄 Restart
 function restartQuiz() {
-  setTimeout(() => location.reload(), 300);
+  location.reload();
 }
-
-// 🚀 Start the Quiz
-loadQuestion();

@@ -7,7 +7,13 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="quiz-container" id="quiz">
+  <div class="quiz-container fade-in" id="start-screen">
+    <h1 class="title">🧠 Welcome to the Web Quiz!</h1>
+    <p>Test your knowledge of <strong>HTML, CSS & JavaScript</strong>.</p>
+    <button id="start-btn">Start Quiz 🚀</button>
+  </div>
+
+  <div class="quiz-container fade-in" id="quiz" style="display:none;">
     <h1 class="title">💡 JavaScript Quiz</h1>
     <div class="progress">
       <span id="progress-text">Question 1 of 5</span>
